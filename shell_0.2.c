@@ -1,63 +1,81 @@
 #include "shell.h"
 
 /**
- * main - Simple Shell
- * @argc: argument count
- * @argv: argument vector
- * Return: 0 on success
+ * execute_command - execute a command with arguments
+ * @args: pointer to array of arguments
+ * @env: pointer to array of environment variables
+ *
+ * Return: Always 0
  */
-
-int main(int argc, char *argv[])
+int execute_command(char **args, char **env)
 {
-    char *line, *token;
-    size_t len = 0;
     pid_t pid;
     int status;
-    char *args[1024];
-    int i = 0;
 
-    (void)argc;
+    pid = fork();
+    if (pid == -1)
+    {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+    else if (pid == 0)
+    {
+        if (execve(args[0], args, env) == -1)
+        {
+            perror("execve");
+            exit(EXIT_FAILURE);
+        }
+    }
+    else
+    {
+        do {
+            waitpid(pid, &status, WUNTRACED);
+        } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+    }
+
+    return 0;
+}
+
+#include "shell.h"
+
+/**
+ * main - entry point for the shell program
+ * @argc: argument count
+ * @argv: array of arguments
+ * @env: array of environment variables
+ *
+ * Return: Always 0
+ */
+int main(int argc, char **argv, char **env)
+{
+    char *buffer;
+    size_t bufsize = 32;
+    ssize_t characters;
+    char **args;
 
     while (1)
     {
-        printf("$ ");
-        fflush(stdout);
-
-        if (getline(&line, &len, stdin) == -1)
-            break;
-
-        token = strtok(line, " \n");
-        i = 0;
-        while (token)
+        prompt_user();
+        characters = read_input(&buffer, &bufsize);
+        if (characters == -1)
         {
-            args[i] = token;
-            token = strtok(NULL, " \n");
-            i++;
+            free(buffer);
+            exit(EXIT_SUCCESS);
         }
-        args[i] = NULL;
-
+        if (buffer[characters - 1] == '\n')
+            buffer[characters - 1] = '\0';
+        args = parse_args(buffer);
         if (args[0] == NULL)
+        {
+            free(buffer);
+            free(args);
             continue;
-
-        pid = fork();
-        if (pid == -1)
-        {
-            perror("Error");
-            exit(EXIT_FAILURE);
         }
-
-        if (pid == 0)
-        {
-            if (execve(args[0], args, NULL) == -1)
-            {
-                perror("Error");
-                exit(EXIT_FAILURE);
-            }
-        }
-        else
-            wait(&status);
+        execute_command(args, env);
+        free(buffer);
+        free(args);
     }
-    free(line);
-    return (0);
+
+    return 0;
 }
 
