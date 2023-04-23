@@ -7,7 +7,14 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <stddef.h>
+#include <help.h>
 
+
+
+
+
+#define MAX_VALUE_LEN 1024
 #define MAX_INPUT_LEN 1024
 #define MAX_ARGS_LEN 64
 #define MAX_PATHS 64
@@ -20,6 +27,7 @@ typedef struct data_shell_s {
     char **env;
     char **args;
     int status;
+    char **_environ;
 } data_shell;
 
 /* Function prototypes for shell_0.1.c */
@@ -50,8 +58,17 @@ int (*get_builtin(char *cmd))(data_shell *);
 int _setenv(data_shell *datash);
 int _unsetenv(data_shell *datash);
 int get_help(data_shell *datash);
-int (*get_builtin(char *cmd))(data_shell *);
-int _env(data_shell *datash);
+int my_env(data_shell *datash);
+
+/* Function prototypes for env_var1.c */
+int cmp_env_name(const char *nenv, const char *name);
+char *_getenv(const char *name, char **_environ);
+
+/* Function prototypes for env_var2.c */
+char *copy_info(char *name, char *value);
+void set_env(char *name, char *value, data_shell *datash);
+
+
 
 /* Function prototypes for shell_line.c */
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream);

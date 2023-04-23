@@ -1,12 +1,13 @@
 #include "shell.h"
 
+
 /**
- * _env - prints the current environment
+ *my _env - prints the current environment
  *
  * @datash: data relevant (status and args)
  * Return: Always 0.
  */
-int _env(data_shell *datash)
+int my_env(data_shell *datash)
 {
 	char **env;
 
