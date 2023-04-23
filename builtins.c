@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- * get_builtin - Get the corresponding builtin function for a command.
+ * get_my_builtin - Get the corresponding builtin function for a command.
  * @cmd: The command.
  *
  * Return: If a builtin corresponding to @cmd exists, return a pointer to the
  * corresponding function. Otherwise, return NULL.
  */
-int (*get_builtin(char *cmd))(data_shell *)
+int (*get_my_builtin(char *cmd))(data_shell *)
 {
     static const struct {
         const char *name;
@@ -30,4 +30,3 @@ int (*get_builtin(char *cmd))(data_shell *)
     }
     return (NULL);
 }
-

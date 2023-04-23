@@ -8,7 +8,6 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <stddef.h>
-#include <help.h>
 
 
 
