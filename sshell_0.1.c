@@ -1,7 +1,5 @@
 #include "shell.h"
 
-char *argv[] = {NULL};
-
 /**
  * _getline - Reads an entire line from stream.
  * @lineptr: Pointer to buffer.
@@ -12,14 +10,14 @@ char *argv[] = {NULL};
  */
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 {
-    ssize_t nread;
+	ssize_t nread;
 
-    nread = getline(lineptr, n, stream);
+	nread = getline(lineptr, n, stream);
 
-    if (nread == -1)
-        perror("getline");
+	if (nread == -1)
+		perror("getline");
 
-    return (nread);
+	return (nread);
 }
 
 /**
@@ -28,57 +26,73 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
  */
 void execute_command(char *command)
 {
-    pid_t pid;
+	pid_t pid;
+	char **argv;
+	int argc = 2;
 
-    argv[0] = command;
+	argv = malloc(argc * sizeof(char *));
+	if (!argv)
+	{
+		perror("malloc");
+		return;
+	}
 
-    pid = fork();
+	argv[0] = command;
+	argv[1] = NULL;
 
-    if (pid == -1)
-        perror("fork");
-    else if (pid == 0)
-    {
-        if (execve(command, argv, NULL) == -1)
-            perror("execve");
-        exit(EXIT_FAILURE);
-    }
-    else
-        wait(NULL);
+	pid = fork();
+
+	if (pid == -1)
+	{
+		perror("fork");
+		free(argv);
+		return;
+	}
+	else if (pid == 0)
+	{
+		if (execve(command, argv, NULL) == -1)
+			perror("execve");
+		exit(EXIT_FAILURE);
+	}
+	else
+		wait(NULL);
+
+	free(argv);
 }
 
 /**
- *new_ main - Simple UNIX command line interpreter.
+ * my_main - Simple UNIX command line interpreter.
  *
  * Return: Always 0.
  */
-int new_main(void)
+int my_main(void)
 {
-    char *command = NULL;
-    size_t bufsize = 0;
-    ssize_t nread;
+	char *command = NULL;
+	size_t bufsize = 0;
+	ssize_t nread;
 
-    while (1)
-    {
-        printf("$ "); /* Display prompt */
+	while (1)
+	{
+		printf("$\t"); /* Display prompt */
 
-        nread = _getline(&command, &bufsize, stdin); /* Read command line */
+		nread = _getline(&command, &bufsize, stdin); /* Read command line */
 
-        if (nread == -1) /* Handle "end of file" condition */
-        {
-            putchar('\n');
-            break;
-        }
+		if (nread == -1) /* Handle "end of file" condition */
+		{
+			putchar('\n');
+			break;
+		}
 
-        command[nread - 1] = '\0'; /* Remove trailing newline */
+		command[nread - 1] = '\0'; /* Remove trailing newline */
 
-        if (access(command, F_OK) == 0) /* Check if file exists */
-            execute_command(command);
-        else /* Command not found */
-            printf("Command not found: %s\n", command);
-    }
+		if (access(command, F_OK) == 0) /* Check if file exists */
+			execute_command(command);
+		else /* Command not found */
+			printf("Command not found:\t%s\n", command);
+	}
 
-    free(command); /* Free memory allocated for command */
+	free(command); /* Free memory allocated for command */
 
-    return (EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
 

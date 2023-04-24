@@ -8,11 +8,13 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+
+
+
 #define MAX_COMMANDS 10
 #define MAX_ARGS 10
 
 extern char **environ;
-
 
 typedef struct data_shell
 {
@@ -31,7 +33,7 @@ int get_help(data_shell *datash);
 int me_env(data_shell *datash);
 void set_env(char *name, char *value);
 
-int _setenv(const char *name, const char *value, int overwrite);
+/*int _setenv(const char *name, const char *value, int overwrite);*/
 void free_datash(data_shell *datash);
 int myy_setenv(char *name, char *value, int overwrite);
 
