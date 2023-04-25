@@ -18,6 +18,9 @@
 #define MAX_ARGS_LEN 64
 #define MAX_PATHS 64
 #define MAX_ARGS 20
+#define TOKEN_BUFSIZE 64
+#define TOKEN_DELIMITERS " \t\r\n\a"
+
 
 /* Global variable */
 extern char **environ;
@@ -47,6 +50,12 @@ int execute_command_with_path(char **args, char **path);
 int command_not_found(char *cmd);
 int fork_error(void);
 int exec_error(void);
+void prompt_user(void);
+ssize_t read_input(char **buffer, size_t *bufsize);
+void execute_command_char(char *command);
+char **split_input(char *input);
+
+
 
 /* Function prototypes for shell_0.4.c */
 int change_dir(data_shell *datash);
