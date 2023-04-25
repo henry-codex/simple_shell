@@ -75,5 +75,7 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
 /* Function prototype for shell_split.c */
 char **split_line(char *line);
 
+void free_datash(data_shell *datash);
+
 #endif /* SHELL_H */
 
