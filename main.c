@@ -15,7 +15,6 @@ int main(void)
 	signal(SIGINT, signal_handler);
 	while (1)
 	{
-		puts("I am here");
 		index_cmd(&data);
 		if (read_line(&data) < 0)
 		{
@@ -83,7 +82,7 @@ int read_line(sh_t *data)
 			new_size = size * 2;
 			length = csr_ptr - data->line;
 			data->line = _realloc(data->line, size * sizeof(char),
-					new_size * sizeof(char));
+						new_size * sizeof(char));
 			if (data->line == NULL)
 				return (FAIL);
 			size = new_size;
@@ -169,10 +168,9 @@ int process_cmd(sh_t *data)
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
-		printf("%s comand", data->cmd);
 		if (execve(data->cmd, data->args, environ) < 0)
-			data->error_msg = _strdup("not found\n");
-		return (FAIL);
+		data->error_msg = _strdup("not found\n");
+			return (FAIL);
 	}
 	else
 	{

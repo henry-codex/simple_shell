@@ -51,7 +51,7 @@ int change_dir(sh_t *data)
  * Return: (Success) 0 is returned
  * ------- (Fail) negative number will returned
  */
-int _exit_(sh_t *data __attribute__((unused)))
+int abort_prg(sh_t *data __attribute__((unused)))
 {
 	int code, i = 0;
 
@@ -113,7 +113,7 @@ int display_help(sh_t *data)
 int handle_builtin(sh_t *data)
 {
 	blt_t blt[] = {
-		{"exit", _exit_},
+		{"exit", abort_prg},
 		{"cd", change_dir},
 		{"help", display_help},
 		{NULL, NULL}

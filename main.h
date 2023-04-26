@@ -100,7 +100,7 @@ int write_history(sh_t *data);
 int _isalpha(int c);
 
 /* -------------Builtins-----------------*/
-int _exit_(sh_t *data);
+int abort_prg(sh_t *data);
 int change_dir(sh_t *data);
 int display_help(sh_t *data);
 int handle_builtin(sh_t *data);

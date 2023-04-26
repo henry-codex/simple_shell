@@ -60,7 +60,7 @@ void is_short_form(sh_t *data)
 int is_builtin(sh_t *data)
 {
 	blt_t blt[] = {
-		{"exit", _exit_},
+		{"exit", abort_prg},
 		{"cd", change_dir},
 		{"help", display_help},
 		{NULL, NULL}
