@@ -16,11 +16,10 @@ int _launch(char **argv)
 	child_pid = fork();
 	if (child_pid == 0)
 	{
-		if (execvp(argv[0], argv) == -1)
+		if (execve(argv[0], argv, NULL) == -1)
 		{
 			perror("hsh");
 		}
-		printf("\n");
 		exit(EXIT_FAILURE);
 	}
 	else if (child_pid < 0)
@@ -69,13 +68,10 @@ int execmd(char **argv)
 		}
 		else
 		{
-			fprintf(stderr, "hsh: command not found: %s\n", argv[0]);
+			perror("hsh");
 			return (127);
 		}
 
 	}
-	else
-	{
-		return (1);
-	}
+	return (1);
 }
