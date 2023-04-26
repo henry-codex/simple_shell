@@ -24,7 +24,7 @@ char *get_location(char *command)
 			strcat(file_path, command);
 			strcat(file_path, "\0");
 
-			printf("%s file path\n", file_path);
+			/*printf("%s file path\n", file_path);*/
 			/* stat is used to test if the filepath exists */
 			if (stat(file_path, &buffer) == 0)
 			{
