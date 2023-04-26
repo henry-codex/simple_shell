@@ -1,5 +1,24 @@
 #include "main.h"
 /**
+ * _strchr - locates a character in a given string
+ * @str: the given string
+ * @c: the given string
+ *
+ * Return: (Success) a pointer to the first occurence of c
+ * ------- (Fail) return a null pointer
+ */
+char *_strchr(char *str, char c)
+{
+	char *ptr;
+
+	if (str == NULL)
+		return (NULL);
+	for (ptr = str; *ptr; ptr++)
+		if (*ptr == c)
+			return (ptr);
+	return (NULL);
+}
+/**
  * _strcpy - copies a string
  * @dest: the destination
  * @src: the source
@@ -27,7 +46,7 @@ char *_strcpy(char *dest, char *src)
  *
  * Return: pointer to the duplicated string
  */
-char *_strdup(const char *str)
+char *_strdup(char *str)
 {
 	int length = 0;
 	char *ret;
@@ -42,4 +61,18 @@ char *_strdup(const char *str)
 	for (length++; length--;)
 		ret[length] = *--str;
 	return (ret);
+}
+/**
+ * _isalpha - check if the input is a letter
+ * @c: the character to be checked
+ *
+ * Return: 1 if letter, 0 otherwise
+ */
+int _isalpha(int c)
+{
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+	{
+		return (SUCCESS);
+	}
+	return (FAIL);
 }
