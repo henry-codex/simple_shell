@@ -7,7 +7,8 @@ typedef struct builtin_func {
 } builtin_t;
 
 static builtin_t builtins[] = {
-	{"exit", &__exit}
+	{"exit", &__exit},
+	{"env", &__env}
 };
 
 int len_builtin_func(void);

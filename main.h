@@ -7,11 +7,14 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 
+extern char **environ;
+
 int execmd(char **argv);
 char *get_location(char *);
 int _launch(char **argv);
 
 int __exit(char **argv);
+int __env(char **argv);
 /**
 typedef struct builtin_func {
 	char *name;
