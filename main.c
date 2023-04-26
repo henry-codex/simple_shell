@@ -1,8 +1,6 @@
 #include "main.h"
 /**
- * - main - Entry point
- * @argc: arguments count
- * @argv: arguments
+ * main - Entry point
  *
  * Return: always 0
  */
@@ -21,8 +19,7 @@ int main(void)
 	const char *delim = " \n";
 
 	(void)argc;
-	do
-	{
+	do {
 		char *prompt = "$ ";
 		printf("%s", prompt);
 		bytes_read = getline(&lineptr, &n, stdin);
@@ -65,8 +62,7 @@ int main(void)
 		free(lineptr_copy);
 		lineptr_copy = NULL;
 		free(argv);
-	}
-	while (status);
+	} while (status);
 
 	return (0);
 }

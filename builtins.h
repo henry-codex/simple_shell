@@ -10,6 +10,6 @@ static builtin_t builtins[] = {
 	{"exit", &__exit}
 };
 
-int len_builtin_func();
+int len_builtin_func(void);
 
 #endif

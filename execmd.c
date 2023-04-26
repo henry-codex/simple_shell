@@ -29,11 +29,9 @@ int _launch(char **argv)
 	}
 	else
 	{
-		do
-		{
+		do {
 			waitpid(child_pid, &status, WUNTRACED);
-		}
-		while (!WIFEXITED(status) && !WIFSIGNALED(status));
+		} while (!WIFEXITED(status) && !WIFSIGNALED(status));
 
 	}
 	return (1);

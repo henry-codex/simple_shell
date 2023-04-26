@@ -5,7 +5,7 @@
  *
  * Return: size
  */
-int len_builtin_func()
+int len_builtin_func(void)
 {
 	size_t size;
 
