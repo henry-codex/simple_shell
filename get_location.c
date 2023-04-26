@@ -12,17 +12,17 @@ char *get_location(char *command)
 
 	if (path)
 	{
-		path_copy = strdup(path);
+		path_copy = _strdup(path);
 		path_token = strtok(path_copy, ":");
 
 		/* Go through dirrectories of PATH, if path_token/command exists*/
 		while (path_token != NULL)
 		{
 			file_path = malloc(strlen(path_token) + strlen(command) + 2);
-			strcpy(file_path, path_token);
-			strcat(file_path, "/");
-			strcat(file_path, command);
-			strcat(file_path, "\0");
+			_strcpy(file_path, path_token);
+			_strcat(file_path, "/");
+			_strcat(file_path, command);
+			_strcat(file_path, "\0");
 
 			/*printf("%s file path\n", file_path);*/
 			/* stat is used to test if the filepath exists */

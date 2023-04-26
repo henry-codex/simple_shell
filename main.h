@@ -9,6 +9,13 @@
 
 extern char **environ;
 
+/* string functions */
+int _strlen(char *s);
+int _strcmp(char *s1, char *s2);
+char *_strcat(char *dest, char *src);
+char *_strcpy(char *dest, char *src);
+char *_strdup(const char *dest);
+
 int execmd(char **argv);
 char *get_location(char *);
 int _launch(char **argv);

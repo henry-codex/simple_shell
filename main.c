@@ -33,7 +33,7 @@ int main(void)
 		{
 			perror("hsh: memory allocation error");
 		}
-		strcpy(lineptr_copy, lineptr);
+		_strcpy(lineptr_copy, lineptr);
 
 		/* Get number of tokens it will be divided into */
 		token = strtok(lineptr, delim);
@@ -51,7 +51,7 @@ int main(void)
 		for (i = 0; token != NULL; i++)
 		{
 			argv[i] = malloc(sizeof(char) * strlen(token) + 1);
-			strcpy(argv[i], token);
+			_strcpy(argv[i], token);
 
 			token = strtok(NULL, delim);
 		}

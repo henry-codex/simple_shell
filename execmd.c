@@ -25,6 +25,7 @@ int _launch(char **argv)
 	else if (child_pid < 0)
 	{
 		perror("hsh");
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
@@ -55,7 +56,7 @@ int execmd(char **argv)
 		/*printf("%s command", command);*/
 		for (i = 0; i < len_builtin_func(); i++)
 		{
-			if (strcmp(argv[0], builtins[i].name) == 0)
+			if (_strcmp(argv[0], builtins[i].name) == 0)
 			{
 				/*printf("%s comand ", argv[0]);*/
 				return (builtins[i].func(argv));
