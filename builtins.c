@@ -5,9 +5,14 @@
  * change_dir - changes directory
  * @data: a pointer to the data structure
  *
- * Return: (Success) 0 is returned
- * ------- (Fail) negative number will returned
+ * This function is responsible for changing the current working directory to
+ * the specified directory. The new directory is obtained from the `data`
+ * parameter, which is a pointer to a data structure that contains information
+ * about the new directory.
+ *
+ * Return: On success, zero is returned. On failure, a neg. num is returned.
  */
+
 int change_dir(sh_t *data)
 {
 	char *home;
@@ -49,7 +54,7 @@ int change_dir(sh_t *data)
  * @data: a pointer to the data structure
  *
  * Return: (Success) 0 is returned
- * ------- (Fail) negative number will returned
+ * (Fail) negative number will returned
  */
 int abort_prg(sh_t *data __attribute__((unused)))
 {
@@ -77,7 +82,7 @@ int abort_prg(sh_t *data __attribute__((unused)))
  * @data: a pointer to the data structure
  *
  * Return: (Success) 0 is returned
- * ------- (Fail) negative number will returned
+ *  (Fail) negative number will returned
  */
 int display_help(sh_t *data)
 {
@@ -108,7 +113,7 @@ int display_help(sh_t *data)
  * @data: a pointer to the data structure
  *
  * Return: (Success) 0 is returned
- * ------- (Fail) negative number will returned
+ * (Fail) negative number will returned
  */
 int handle_builtin(sh_t *data)
 {

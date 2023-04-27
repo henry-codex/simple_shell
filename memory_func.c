@@ -1,12 +1,17 @@
 #include "main.h"
 /**
- * _realloc - reallocates memory block
- * @ptr: pointer to the previous memory
- * @old_size: the old size
- * @new_size: the new size
+ * _realloc - Reallocates a memory block to a new size.
  *
- * Return: a pointer to the newly allocated memory
+ * @ptr: A pointer to the previously allocated memory block.
+ * @old_size: The previous size of the memory block in bytes.
+ * @new_size: The new size of the memory block in bytes.
+ *
+ * Return: If successful, a pointer to the newly allocated memory block is
+ *         returned. If new_size is 0 and ptr is not NULL, the memory block is
+ *         freed and NULL is returned. Otherwise, NULL is returned and the
+ *         contents of ptr are unchanged.
  */
+
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 	void *result;
@@ -34,12 +39,13 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	return (result);
 }
 /**
- * _memset - fills a memory with constant byte
- * @s: pointer to memory area
- * @n: first n bytes
- * @byt: constant byte
+ * _memset - fills a memory with a constant byte
  *
- * Return: A pointer to a character
+ * @s: pointer to the memory area
+ * @n: number of bytes to be filled
+ * @byt: constant byte to be filled
+ *
+ * Return: pointer to the memory area s
  */
 char *_memset(char *s, char byt, unsigned int n)
 {
@@ -52,11 +58,10 @@ char *_memset(char *s, char byt, unsigned int n)
 	return (s);
 }
 /**
- * free_data - frees data
- * @data: the data structure
+ * free_data - frees the data structure
+ * @data: pointer to the data structure
  *
- * Return: (Success) positive number
- * ------- (Fail) negative number
+ * Return: 1 on success, -1 on failure
  */
 int free_data(sh_t *data)
 {
@@ -71,7 +76,7 @@ int free_data(sh_t *data)
 	return (0);
 }
 /**
- * _memcpy - cpies memory area
+ * _memcpy - copies memory area
  * @dest: Destination memory area
  * @src: Source memory area
  * @n: Amount of memory byte
